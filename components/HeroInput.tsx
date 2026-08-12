@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, KeyboardEvent, useEffect, useRef } from "react";
+import { messages } from "@/locales";
 
 interface HeroInputProps {
   value: string;
@@ -21,7 +22,7 @@ export default function HeroInput({
   value, 
   onChange, 
   onSubmit, 
-  placeholder = "Describe what you want to build...",
+  placeholder = messages.hero.defaultPrompt,
   className = "",
   showSearchFeatures = true
 }: HeroInputProps) {
@@ -135,6 +136,7 @@ export default function HeroInput({
           <button
             onClick={onSubmit}
             disabled={!value.trim()}
+            aria-label={messages.hero.defaultButton}
             className={`
               button relative rounded-10 px-8 py-8 text-label-medium font-medium
               flex items-center justify-center gap-6
@@ -147,7 +149,7 @@ export default function HeroInput({
             {value.trim() && <div className="button-background absolute inset-0 rounded-10 pointer-events-none" />}
             {value.trim() ? (
               <>
-                <span className="px-6 relative">Re-imagine Site</span>
+                <span className="px-6 relative">{messages.hero.defaultButton}</span>
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M3 8H13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                   <path d="M8.5 3.5L13 8L8.5 12.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>

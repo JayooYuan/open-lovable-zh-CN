@@ -10,6 +10,7 @@ import FirecrawlIcon from "@/components/shared/firecrawl-icon/firecrawl-icon";
 import Logo from "@/components/shared/header/_svg/Logo";
 import { useHeaderContext } from "@/components/shared/header/HeaderContext";
 import { cn } from "@/utils/cn";
+import { messages } from "@/locales";
 
 import Download from "./_svg/Download";
 import Guidelines from "./_svg/Guidelines";
@@ -36,6 +37,7 @@ export default function HeaderBrandKit() {
       <Link
         className="flex items-center gap-2 relative brand-kit-menu"
         href="/"
+        aria-label={messages.home.homeLink}
         onContextMenu={(e) => {
           e.preventDefault();
           setOpen(!open);
@@ -147,7 +149,7 @@ const Menu = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
             strokeWidth="1.25"
           />
         </svg>
-        Open in new tab
+        {messages.common.openInNewTab}
       </Button>
 
       <div className="px-8 py-4">
@@ -169,7 +171,7 @@ const Menu = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
         onMouseLeave={onMouseLeave}
       >
         <Icon />
-        Copy logo as SVG
+        {messages.brandKit.copyLogo}
       </Button>
 
       <Button
@@ -180,7 +182,7 @@ const Menu = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
         onMouseLeave={onMouseLeave}
       >
         <Download />
-        Download brand assets
+        {messages.brandKit.downloadAssets}
       </Button>
 
       <div className="px-8 py-4">
@@ -195,7 +197,7 @@ const Menu = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
         onMouseLeave={onMouseLeave}
       >
         <Guidelines />
-        Visit brand guidelines
+        {messages.brandKit.guidelines}
       </Button>
     </motion.div>
   );

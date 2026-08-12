@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { appConfig } from "@/config/app.config";
+import { messages } from "@/locales";
 
 interface SidebarInputProps {
   onSubmit: (url: string, style: string, model: string, instructions?: string) => void;
@@ -23,16 +24,7 @@ export default function SidebarInput({ onSubmit, disabled = false }: SidebarInpu
   //   return urlPattern.test(urlString.toLowerCase());
   // };
 
-  const styles = [
-    { id: "1", name: "Glassmorphism", description: "Frosted glass effect" },
-    { id: "2", name: "Neumorphism", description: "Soft 3D shadows" },
-    { id: "3", name: "Brutalism", description: "Bold and raw" },
-    { id: "4", name: "Minimalist", description: "Clean and simple" },
-    { id: "5", name: "Dark Mode", description: "Dark theme design" },
-    { id: "6", name: "Gradient Rich", description: "Vibrant gradients" },
-    { id: "7", name: "3D Depth", description: "Dimensional layers" },
-    { id: "8", name: "Retro Wave", description: "80s inspired" },
-  ];
+  const styles = messages.styles;
 
   const models = appConfig.ai.availableModels.map(model => ({
     id: model,
@@ -58,7 +50,7 @@ export default function SidebarInput({ onSubmit, disabled = false }: SidebarInpu
          {/* link to home page with button */}
          <Link href="/">
           <button className="w-full px-3 py-2 text-xs font-medium text-gray-700 bg-white rounded border border-gray-200 focus:border-orange-500 focus:outline-none focus:ring-1 focus:ring-orange-500">
-            Generate a new website
+            {messages.sidebar.newWebsite}
           </button>
          </Link>
         </div>
@@ -68,7 +60,7 @@ export default function SidebarInput({ onSubmit, disabled = false }: SidebarInpu
           <div className="p-4 space-y-4">
             {/* Style Selector */}
             <div>
-              <label className="block text-xs font-medium text-gray-700 mb-2">Style</label>
+              <label className="block text-xs font-medium text-gray-700 mb-2">{messages.common.style}</label>
               <div className="grid grid-cols-2 gap-1.5">
                 {styles.map((style) => (
                   <button
@@ -92,7 +84,7 @@ export default function SidebarInput({ onSubmit, disabled = false }: SidebarInpu
 
             {/* Model Selector */}
             <div>
-              <label className="block text-xs font-medium text-gray-700 mb-2">AI Model</label>
+              <label className="block text-xs font-medium text-gray-700 mb-2">{messages.common.aiModel}</label>
               <select
                 value={selectedModel}
                 onChange={(e) => setSelectedModel(e.target.value)}
@@ -109,14 +101,14 @@ export default function SidebarInput({ onSubmit, disabled = false }: SidebarInpu
 
             {/* Additional Instructions */}
             <div>
-              <label className="block text-xs font-medium text-gray-700 mb-2">Additional Instructions (optional)</label>
+              <label className="block text-xs font-medium text-gray-700 mb-2">{messages.sidebar.additionalInstructions}</label>
               <input
                 type="text"
                 value={additionalInstructions}
                 onChange={(e) => setAdditionalInstructions(e.target.value)}
                 disabled={disabled}
                 className="w-full px-3 py-2 text-xs text-gray-700 bg-gray-50 rounded border border-gray-200 focus:border-orange-500 focus:outline-none focus:ring-1 focus:ring-orange-500 placeholder:text-gray-400"
-                placeholder="e.g., make it more colorful, add animations..."
+                placeholder={messages.sidebar.additionalInstructionsPlaceholder}
               />
             </div>
 
@@ -133,7 +125,7 @@ export default function SidebarInput({ onSubmit, disabled = false }: SidebarInpu
                   }
                 `}
               >
-                {disabled ? 'Scraping...' : 'Scrape Site'}
+                {disabled ? messages.sidebar.scraping : messages.sidebar.scrape}
               </button>
             </div>
           </div>

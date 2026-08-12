@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { messages } from '@/locales';
 
 export interface CodeApplicationState {
   stage: 'analyzing' | 'installing' | 'applying' | 'complete' | null;
@@ -50,7 +51,7 @@ export default function CodeApplicationProgress({ state }: CodeApplicationProgre
 
           {/* Simple loading text */}
           <div className="text-sm font-medium text-gray-700">
-            Applying to sandbox...
+            {messages.dynamicExact['Applying to sandbox...']}
           </div>
         </div>
       </motion.div>

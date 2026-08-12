@@ -3,10 +3,11 @@ import { AnimatePresence, motion } from "motion/react";
 import AnimatedWidth from "@/components/shared/layout/animated-width";
 import ArrowRight from "@/components/app/(home)/sections/hero-input/_svg/ArrowRight";
 import Button from "@/components/shared/button/Button";
+import { messages } from "@/locales";
 
 export default function HeroInputSubmitButton({
   dirty,
-  buttonText = "Re-imagine Site",
+  buttonText = messages.hero.defaultButton,
   disabled = false,
 }: {
   dirty: boolean;
@@ -19,6 +20,7 @@ export default function HeroInputSubmitButton({
       size="large" 
       variant="primary"
       disabled={disabled}
+      aria-label={buttonText}
     >
       <AnimatedWidth>
         <AnimatePresence initial={false} mode="popLayout">

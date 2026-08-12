@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Loader2, ExternalLink, RefreshCw, Terminal } from 'lucide-react';
+import { messages } from '@/locales';
 
 interface SandboxPreviewProps {
   type: 'vite' | 'nextjs' | 'console';
@@ -28,7 +29,7 @@ export default function SandboxPreview({
     return (
       <div className="bg-gray-800 rounded-lg p-4 border border-gray-700">
         <div className="font-mono text-sm whitespace-pre-wrap text-gray-300">
-          {output || 'No output yet...'}
+          {output || messages.sandbox.noOutput}
         </div>
       </div>
     );
@@ -40,28 +41,28 @@ export default function SandboxPreview({
       <div className="flex items-center justify-between bg-gray-800 rounded-lg p-3 border border-gray-700">
         <div className="flex items-center gap-3">
           <span className="text-sm text-gray-400">
-            {type === 'vite' ? '⚡ Vite' : '▲ Next.js'} Preview
+            {type === 'vite' ? `⚡ ${messages.sandbox.vitePreview}` : `▲ ${messages.sandbox.nextPreview}`}
           </span>
           {previewUrl ? (
             <code className="text-xs bg-gray-900 px-2 py-1 rounded text-blue-400">
               {previewUrl}
             </code>
           ) : (
-            <span className="text-xs text-gray-500">Waiting for sandbox URL...</span>
+            <span className="text-xs text-gray-500">{messages.sandbox.waitingForUrl}</span>
           )}
         </div>
         <div className="flex items-center gap-2">
           <button
             onClick={() => setShowConsole(!showConsole)}
             className="p-2 hover:bg-gray-700 rounded transition-colors"
-            title="Toggle console"
+            title={messages.sandbox.toggleConsole}
           >
             <Terminal className="w-4 h-4" />
           </button>
           <button
             onClick={handleRefresh}
             className="p-2 hover:bg-gray-700 rounded transition-colors"
-            title="Refresh preview"
+            title={messages.sandbox.refresh}
           >
             <RefreshCw className="w-4 h-4" />
           </button>
@@ -71,7 +72,7 @@ export default function SandboxPreview({
               target="_blank"
               rel="noopener noreferrer"
               className="p-2 hover:bg-gray-700 rounded transition-colors"
-              title="Open in new tab"
+              title={messages.common.openInNewTab}
             >
               <ExternalLink className="w-4 h-4" />
             </a>
@@ -87,10 +88,10 @@ export default function SandboxPreview({
               <Loader2 className="w-8 h-8 animate-spin mx-auto mb-2" />
               <p className="text-sm text-gray-400">
                 {!previewUrl 
-                  ? 'Setting up sandbox environment...' 
+                  ? messages.sandbox.settingUp
                   : type === 'vite' 
-                    ? 'Starting Vite dev server...' 
-                    : 'Starting Next.js dev server...'
+                    ? messages.sandbox.startingVite
+                    : messages.sandbox.startingNext
                 }
               </p>
             </div>
@@ -112,7 +113,7 @@ export default function SandboxPreview({
       {showConsole && output && (
         <div className="bg-gray-800 rounded-lg p-4 border border-gray-700">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-sm font-semibold text-gray-400">Console Output</span>
+            <span className="text-sm font-semibold text-gray-400">{messages.sandbox.consoleOutput}</span>
           </div>
           <div className="font-mono text-xs whitespace-pre-wrap text-gray-300 max-h-48 overflow-y-auto">
             {output}

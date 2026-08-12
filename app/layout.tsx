@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Roboto_Mono } from "next/font/google";
 import localFont from "next/font/local";
+import { messages } from "@/locales";
 import "./globals.css";
 
 const inter = Inter({ 
@@ -26,8 +27,8 @@ const robotoMono = Roboto_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Open Lovable v3",
-  description: "Re-imagine any website in seconds with AI-powered website builder.",
+  title: messages.metadata.title,
+  description: messages.metadata.description,
 };
 
 export default function RootLayout({
@@ -36,7 +37,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="zh-CN">
       <body className={`${inter.variable} ${geistSans.variable} ${geistMono.variable} ${robotoMono.variable} font-sans`}>
         {children}
       </body>
