@@ -9,7 +9,7 @@
 - 实际仓库根目录：包含本文件与 `package.json` 的目录；不要停留在外层同名目录。
 - 上游仓库：`https://github.com/firecrawl/open-lovable.git`
 - 当前上游基线：`69bd93bae7a9c97ef989eb70aabe6797fb3dac89`（提交说明 `v3`）
-- 当前仓库是 shallow clone。需要完整历史时执行 `git fetch --unshallow origin`；如果远程已按开源流程改名，则执行 `git fetch --unshallow upstream`。
+- 当前仓库已获取完整历史。`upstream` 指向 Firecrawl 官方仓库，`origin` 指向 `https://github.com/JayooYuan/open-lovable-zh-CN.git`。
 - 本地开发地址：`http://127.0.0.1:3000`
 
 ## 新对话开始步骤
@@ -151,7 +151,7 @@ pnpm build
 - 当前 `.codex-dev.stdout.log` 和 `.codex-dev.stderr.log` 是本地服务日志，不应进入 Git。
 - `pnpm-workspace.yaml` 定义 `packages/*` 工作区和必要的 native build allowlist，是可复现安装的一部分。
 - 不得把真实 API Key、第三方服务账号信息或带鉴权参数的 URL 写入 issue、README、测试夹具或提交历史。
-- 当前 `origin` 指向官方上游。在按开源交接手册配置自己的远程仓库前，不要执行 `git push`。
+- `origin` 是简体中文社区仓库，`upstream` 是官方上游；推送前仍需核对 `git remote -v`，不得向 `upstream` 推送社区版提交。
 - 保留上游 `LICENSE` 和版权信息。
 
 ## 常见故障

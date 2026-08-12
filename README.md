@@ -29,7 +29,7 @@ Firecrawl、沙箱和模型 API 通常按量计费。请先阅读各服务的价
 ## 快速开始
 
 ```bash
-git clone <你的仓库地址>
+git clone https://github.com/JayooYuan/open-lovable-zh-CN.git
 cd open-lovable-zh-CN
 pnpm install --frozen-lockfile
 cp .env.example .env.local

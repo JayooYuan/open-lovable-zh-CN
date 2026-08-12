@@ -8,7 +8,7 @@
 
 ## 2026-08-12 整理状态
 
-开源前的主要代码与仓库整理已经拆分为五个功能提交；本文件及社区文档由最后的 docs 提交收口。尚未创建 tag、远程社区仓库或 GitHub Release，也没有执行 `git push` 或 `git fetch --unshallow`。
+开源前的主要代码与仓库整理已经拆分为五个功能提交；本文件及社区文档由最后的 docs 提交收口。公开社区仓库 `https://github.com/JayooYuan/open-lovable-zh-CN` 已创建，完整上游历史已获取，远程职责已经配置；尚未创建 tag 或 GitHub Release。
 
 已创建的功能提交：
 
@@ -46,18 +46,18 @@
 
 下次继续顺序：
 
-1. 用户确认准确的 GitHub 仓库 URL、账号和可见性。
-2. 获取完整上游历史，将官方远程改名为 `upstream`，并把确认后的社区仓库配置为 `origin`。
-3. 从明确上游基线生成 patch，并在独立干净工作树执行 `git apply --check`。
-4. 再次确认远程指向后推送，创建 `v3-zh.1` tag 与 GitHub Release，并附带校验过的 patch。
+1. 从明确上游基线生成 patch，并在独立干净工作树执行 `git apply --check`。
+2. 再次确认远程指向后推送 `main`。
+3. 创建 `v3-zh.1` tag 与 GitHub Release，并附带校验过的 patch。
 
 ## 当前基线
 
 - 官方上游：`https://github.com/firecrawl/open-lovable.git`
 - 当前基线提交：`69bd93bae7a9c97ef989eb70aabe6797fb3dac89`（`v3`）
 - 原项目许可证：MIT License
-- 当前仓库：shallow clone
-- 当前远程 `origin`：仍指向官方上游，不能直接作为中文社区版的推送目标
+- 当前仓库：完整 Git 历史
+- 当前远程 `origin`：`https://github.com/JayooYuan/open-lovable-zh-CN.git`
+- 当前远程 `upstream`：`https://github.com/firecrawl/open-lovable.git`
 - 本地已经过端到端联调，开发地址为 `http://127.0.0.1:3000`
 - 最近的 `pnpm run check` 和 `pnpm build` 均通过
 - 生产依赖审计无 critical、high 或 moderate，仅有一个暂无可用同主版本修复包的 low
