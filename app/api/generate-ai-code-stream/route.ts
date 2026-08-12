@@ -25,24 +25,27 @@ console.log('[generate-ai-code-stream] AI Gateway config:', {
 });
 
 const groq = createGroq({
-  apiKey: process.env.AI_GATEWAY_API_KEY ?? process.env.GROQ_API_KEY,
+  apiKey: process.env.AI_GATEWAY_API_KEY || process.env.GROQ_API_KEY,
   baseURL: isUsingAIGateway ? aiGatewayBaseURL : undefined,
 });
 
 const anthropic = createAnthropic({
-  apiKey: process.env.AI_GATEWAY_API_KEY ?? process.env.ANTHROPIC_API_KEY,
+  apiKey: process.env.AI_GATEWAY_API_KEY || process.env.ANTHROPIC_API_KEY,
   baseURL: isUsingAIGateway ? aiGatewayBaseURL : (process.env.ANTHROPIC_BASE_URL || 'https://api.anthropic.com/v1'),
 });
 
 const googleGenerativeAI = createGoogleGenerativeAI({
-  apiKey: process.env.AI_GATEWAY_API_KEY ?? process.env.GEMINI_API_KEY,
+  apiKey: process.env.AI_GATEWAY_API_KEY || process.env.GEMINI_API_KEY,
   baseURL: isUsingAIGateway ? aiGatewayBaseURL : undefined,
 });
 
 const openai = createOpenAI({
-  apiKey: process.env.AI_GATEWAY_API_KEY ?? process.env.OPENAI_API_KEY,
+  apiKey: process.env.AI_GATEWAY_API_KEY || process.env.OPENAI_API_KEY,
   baseURL: isUsingAIGateway ? aiGatewayBaseURL : process.env.OPENAI_BASE_URL,
 });
+
+const openaiModel = (modelId: string) =>
+  process.env.OPENAI_API_MODE === 'chat' ? openai.chat(modelId) : openai(modelId);
 
 // Helper function to analyze user preferences from conversation history
 function analyzeUserPreferences(messages: ConversationMessage[]): {
@@ -1218,7 +1221,7 @@ MORPH FAST APPLY MODE (EDIT-ONLY):
         const isOpenAI = model.startsWith('openai/');
         const isKimiGroq = model === 'moonshotai/kimi-k2-instruct-0905';
         const modelProvider = isAnthropic ? anthropic : 
-                              (isOpenAI ? openai : 
+                              (isOpenAI ? openaiModel :
                               (isGoogle ? googleGenerativeAI : 
                               (isKimiGroq ? groq : groq)));
         
@@ -1358,7 +1361,7 @@ It's better to have 3 complete files than 10 incomplete files.`
               // If Groq fails, try switching to a fallback model
               if (isGroqServiceError && retryCount === maxRetries) {
                 console.log('[generate-ai-code-stream] Groq service unavailable, falling back to GPT-4');
-                streamOptions.model = openai('gpt-4-turbo');
+                streamOptions.model = openaiModel('gpt-4-turbo');
                 actualModel = 'gpt-4-turbo';
               }
             } else {
@@ -1728,7 +1731,7 @@ Provide the complete file content without any truncation. Include all necessary 
                 // Create a new client for the completion based on the provider
                 let completionClient;
                 if (model.includes('gpt') || model.includes('openai')) {
-                  completionClient = openai;
+                  completionClient = openaiModel;
                 } else if (model.includes('claude')) {
                   completionClient = anthropic;
                 } else if (model === 'moonshotai/kimi-k2-instruct-0905') {
