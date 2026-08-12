@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      FIRECRAWL_API_KEY: ci_placeholder
+      SANDBOX_PROVIDER: e2b
+      E2B_API_KEY: ci_placeholder
+      OPENAI_API_KEY: ci_placeholder
+      OPENAI_BASE_URL: https://example.invalid/v1
+      OPENAI_API_MODE: chat
+      NEXT_PUBLIC_DEFAULT_MODEL: openai/gpt-5
+      NEXT_PUBLIC_APP_URL: http://127.0.0.1:3000
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 11.16.0
+          run_install: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Lint and typecheck
+        run: pnpm check
+
+      - name: Build
+        run: pnpm build
