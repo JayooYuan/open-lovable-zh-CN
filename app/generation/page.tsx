@@ -265,6 +265,12 @@ function AISandboxPage() {
       // Check if sandbox ID is in URL
       const sandboxIdParam = searchParams.get('sandbox');
       
+      if (!sandboxIdParam && !storedUrl) {
+        console.log('[home] Waiting for the first request before creating a sandbox');
+        setLoading(false);
+        return;
+      }
+
       setLoading(true);
       try {
         if (sandboxIdParam) {
@@ -2688,6 +2694,7 @@ Tip: I automatically detect and install npm packages from your code imports (lik
       
       // Wait for sandbox to be ready (if it's still creating)
       const createdSandbox = await sandboxPromise;
+      const effectiveSandbox = createdSandbox || sandboxData;
       
       // Now start the clone process which will stream the generation
       setUrlInput(homeUrlInput);
@@ -3021,7 +3028,7 @@ Focus on the key sections and content, making it clean and modern.`;
             prompt,
             model: aiModel,
             context: {
-              sandboxId: sandboxData?.sandboxId,
+              sandboxId: effectiveSandbox?.sandboxId,
               structure: structureContent,
               conversationContext: conversationContext
             }
@@ -3207,7 +3214,7 @@ Focus on the key sections and content, making it clean and modern.`;
           setPromptInput(generatedCode);
 
           // Apply the code (first time is not edit mode)
-          await applyGeneratedCode(generatedCode, false);
+          await applyGeneratedCode(generatedCode, false, effectiveSandbox || undefined);
 
           addChatMessage(
             brandExtensionMode
