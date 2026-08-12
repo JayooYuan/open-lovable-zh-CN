@@ -103,6 +103,6 @@ pnpm start      # 启动生产构建
 
 ## 版本与许可
 
-计划中的首个社区版标签为 `v3-zh.1`，变更记录见 [CHANGELOG.md](CHANGELOG.md)。发布检查项见 [docs/RELEASE_CHECKLIST.md](docs/RELEASE_CHECKLIST.md)。
+首个社区版本 [v3-zh.1](https://github.com/JayooYuan/open-lovable-zh-CN/releases/tag/v3-zh.1) 已发布，变更记录见 [CHANGELOG.md](CHANGELOG.md)。发布检查项见 [docs/RELEASE_CHECKLIST.md](docs/RELEASE_CHECKLIST.md)。
 
 本项目沿用上游 [MIT License](LICENSE)，并保留原作者版权与许可证文本。感谢 Firecrawl 团队和 Open Lovable 的所有贡献者。

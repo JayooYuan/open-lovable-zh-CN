@@ -8,7 +8,7 @@
 
 ## 2026-08-12 整理状态
 
-开源前的主要代码与仓库整理已经拆分为五个功能提交；本文件及社区文档由最后的 docs 提交收口。公开社区仓库 `https://github.com/JayooYuan/open-lovable-zh-CN` 已创建，完整上游历史已获取，远程职责已经配置；尚未创建 tag 或 GitHub Release。
+开源前的主要代码与仓库整理已经拆分为五个功能提交；本文件及社区文档由 docs 提交收口。公开社区仓库、`v3-zh.1` tag 和 GitHub Release 均已发布，完整上游历史与远程职责也已配置完成。
 
 已创建的功能提交：
 
@@ -17,6 +17,15 @@
 - `c6b31b7 fix: update Firecrawl and sandbox generation flow`
 - `97a32f2 refactor: add typed localization foundation`
 - `46fe6ad feat: add Simplified Chinese interface`
+
+已发布：
+
+- 仓库：`https://github.com/JayooYuan/open-lovable-zh-CN`
+- Release：`https://github.com/JayooYuan/open-lovable-zh-CN/releases/tag/v3-zh.1`
+- tag：`v3-zh.1`，指向 `1bf56a930a103707b9ecd0071d59b23c3ee1b3bb`
+- Patch：`open-lovable-v3-zh.1.patch`，公开下载返回 HTTP 200，大小 776520 字节
+- Patch SHA-256：`67605ab6ab1260e99f1d9dab4909dd073b1dfa74722b9b2382d75cbafc03230f`
+- Patch 已在检出上游基线 `69bd93b` 的独立干净工作树通过 `git apply --check`
 
 已完成：
 
@@ -46,9 +55,9 @@
 
 下次继续顺序：
 
-1. 从明确上游基线生成 patch，并在独立干净工作树执行 `git apply --check`。
-2. 再次确认远程指向后推送 `main`。
-3. 创建 `v3-zh.1` tag 与 GitHub Release，并附带校验过的 patch。
+1. 检查 GitHub Actions 首次运行结果并处理真实失败，不调用付费外部 API。
+2. 根据社区反馈维护 `main`，每次发布继续记录明确的上游 commit。
+3. 同步上游时从独立 `sync/upstream-<version>` 分支开始，重点复验 provider、Firecrawl、沙箱 ID 与中文文案。
 
 ## 当前基线
 
